@@ -1,22 +1,28 @@
 resource "null_resource" "null" {
 }
 
-output "1" {
+output "str" {
   value = "1"
 }
 
-output "3" {
+output "bool" {
   value = true
 }
 
-output "4" {
+output "num" {
   value = 2
 }
 
-output "5" {
+output "obj" {
   value = {
     "a" = "b"
   }
+}
+
+output "sens" {
+  value     = "sensor"
+  sensitive = true
+
 }
 
 
