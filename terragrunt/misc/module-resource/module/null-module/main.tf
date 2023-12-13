@@ -8,3 +8,7 @@ output "name" {
 output "number" {
   value = 3
 }
+
+output "bool" {
+  value = true
+}
