@@ -2,5 +2,5 @@ resource "null_resource" "null" {
 }
 
 output "null" {
-  value = "tomer531"
+  value = "tomer531aa"
 }
