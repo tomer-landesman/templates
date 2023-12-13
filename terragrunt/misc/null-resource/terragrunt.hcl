@@ -6,7 +6,7 @@ resource "null_resource" "null" {
 }
 
 output "tomer" {
-  value = "tomer"
+  value = "to2mer"
 }
 
 EOF
