@@ -9,6 +9,6 @@ output "number" {
   value = 3
 }
 
-output "bool" {
+output "boolbool" {
   value = true
 }
