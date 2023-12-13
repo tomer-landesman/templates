@@ -2,9 +2,9 @@ resource "null_resource" "null" {
 }
 
 output "name" {
-  value = "null"
+  value = "lalal"
 }
 
 output "number" {
-  value = 2
+  value = 3
 }
