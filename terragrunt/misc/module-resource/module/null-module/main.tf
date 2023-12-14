@@ -25,11 +25,11 @@ resource "aws_instance" "example_server" {
   }
 }
 output "bucket" {
-  value = aws_s3_bucket.example_server.id
+  value = aws_instance.example_server.id
 }
 
 output "tag" {
-  value = aws_s3_bucket.example_server.tags
+  value = aws_instance.example_server.tags
 }
 
 output "this" {
