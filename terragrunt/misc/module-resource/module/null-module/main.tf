@@ -1,17 +1,9 @@
-resource "null_resource" "null" {
-}
-
-output "update" {
-  value = {
-    foo    = "keep"
-    baz    = "change-me"
-    remove = "remove me"
+resource "null_resource" "test" {
+  triggers = {
+    timestamp = "${timestamp()}"
   }
 }
 
-output "remove" {
-  value = {
-    foo = "bar"
-    baz = "qux"
-  }
+output "this" {
+  value = null_resource.test.id
 }
