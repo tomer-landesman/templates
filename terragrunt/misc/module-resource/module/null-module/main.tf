@@ -23,11 +23,11 @@ resource "aws_s3_bucket" "example2" {
 }
 
 output "bucket" {
-  value = aws_s3_bucket.example.id
+  value = aws_s3_bucket.example2.id
 }
 
 output "tag" {
-  value = aws_s3_bucket.example.tags
+  value = aws_s3_bucket.example2.tags
 }
 
 output "this" {
