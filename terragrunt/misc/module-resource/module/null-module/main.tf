@@ -1,14 +1,16 @@
 resource "null_resource" "null" {
 }
 
-output "name" {
-  value = "lalal"
+output "update" {
+  value = {
+    foo = "keep"
+    baz = "changed-var"
+  }
 }
 
-output "number" {
-  value = 3
-}
-
-output "boolbool" {
-  value = true
+output "created" {
+  value = {
+    foo = "bar"
+    baz = "qux"
+  }
 }
