@@ -2,11 +2,11 @@ provider "aws" {
   region = "us-west-2"
 }
 
-# resource "null_resource" "test" {
-#   triggers = {
-#     timestamp = "${timestamp()}"
-#   }
-# }
+resource "null_resource" "test" {
+  triggers = {
+    timestamp = "${timestamp()}"
+  }
+}
 
 module "nuller" {
   source = "./module/nuller"
@@ -18,7 +18,7 @@ resource "aws_instance" "example_server" {
 
   tags = {
     Name       = "JacksBlogExample"
-    AnotherTag = "AnotherValue"
+    AnotherTag = "AnotherVasdlue"
   }
 }
 output "bucket" {
@@ -29,9 +29,9 @@ output "tag" {
   value = aws_instance.example_server.tags
 }
 
-# output "this" {
-#   value = null_resource.test.id
-# }
+output "this" {
+  value = null_resource.test.id
+}
 
 output "nuller_id" {
   value = module.nuller.id
