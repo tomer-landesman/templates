@@ -2,11 +2,11 @@ provider "aws" {
   region = "us-west-2"
 }
 
-resource "null_resource" "test" {
-  triggers = {
-    timestamp = "${timestamp()}"
-  }
-}
+# resource "null_resource" "test" {
+#   triggers = {
+#     timestamp = "${timestamp()}"
+#   }
+# }
 
 module "nuller" {
   source = "./module/nuller"
