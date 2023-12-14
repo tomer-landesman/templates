@@ -10,7 +10,7 @@ output "id" {
 
 output "complex" {
   value = {
-    foo     = "upd22ate123123d"
+    foo     = "upd22ate12313123123d"
     lalalal = false
   }
 
