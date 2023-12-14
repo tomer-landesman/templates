@@ -13,11 +13,12 @@ module "nuller" {
 }
 
 # s3 bucket
-resource "aws_s3_bucket" "example" {
+resource "aws_s3_bucket" "example2" {
   bucket = "tomer-l-hamalech-terraform-test-bucket"
 
   tags = {
-    Test = "yes"
+    Test = "no"
+    La   = "bye"
   }
 }
 
