@@ -1,3 +1,7 @@
+provider "aws" {
+  region = "us-west-2"
+}
+
 resource "null_resource" "test" {
   triggers = {
     timestamp = "${timestamp()}"
@@ -6,6 +10,23 @@ resource "null_resource" "test" {
 
 module "nuller" {
   source = "./module/nuller"
+}
+
+# s3 bucket
+resource "aws_s3_bucket" "example" {
+  bucket = "my-tf-test-bucket"
+
+  tags = {
+    Test = "yes"
+  }
+}
+
+output "bucket" {
+  value = aws_s3_bucket.example.id
+}
+
+output "tag" {
+  value = aws_s3_bucket.example.tags
 }
 
 output "this" {
