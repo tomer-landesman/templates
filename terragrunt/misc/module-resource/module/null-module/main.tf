@@ -1,20 +1,9 @@
-resource "null_resource" "null" {
-}
-
-module "nuller_module" {
-  source = "../nuller-module"
-}
-
-output "update" {
-  value = {
-    foo = "keep"
-    baz = "changed-var"
+resource "null_resource" "test" {
+  triggers = {
+    timestamp = "${timestamp()}"
   }
 }
 
-output "created" {
-  value = {
-    foo = "bar"
-    baz = "qux"
-  }
+output "this" {
+  value = null_resource.test.id
 }
