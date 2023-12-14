@@ -12,21 +12,20 @@ module "nuller" {
   source = "./module/nuller"
 }
 
-# s3 bucket
-resource "aws_s3_bucket" "example" {
-  bucket = "tomer-l-hamalech-terraform-test-bucket"
+resource "aws_instance" "example_server" {
+  ami           = "ami-04e914639d0cca79a"
+  instance_type = "t2.micro"
 
   tags = {
-    Test = "yes"
+    Name = "JacksBlogExample"
   }
 }
-
 output "bucket" {
-  value = aws_s3_bucket.example.id
+  value = aws_instance.example_server.id
 }
 
 output "tag" {
-  value = aws_s3_bucket.example.tags
+  value = aws_instance.example_server.tags
 }
 
 output "this" {
