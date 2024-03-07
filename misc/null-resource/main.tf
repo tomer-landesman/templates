@@ -1,3 +1,4 @@
 resource "null_resource" "null" {
-  count = 4
+  count = 6
 }
+
