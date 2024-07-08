@@ -6,7 +6,9 @@ allow[format(rego.metadata.rule())] {
 	1 == 1
 }
 
-default hello := false
+default hello := true
+
+hello
 
 
 format(meta) := meta.description
