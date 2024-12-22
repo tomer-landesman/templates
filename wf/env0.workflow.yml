@@ -2,7 +2,7 @@ environments:
   root:
     workspace: "oot123277nm"
     name: first
-    templateName: "out"
+    templateName: "in"
   first_a:
     workspace: "first_ab127723mm"
     name: first_a
