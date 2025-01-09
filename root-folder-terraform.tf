@@ -1,4 +1,4 @@
 # root folder terraform 
 resource "null_resource" "null" {
-    count = 2
+    count = 4
 }
