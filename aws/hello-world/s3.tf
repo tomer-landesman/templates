@@ -7,8 +7,22 @@ resource "random_string" "random" {
 }
 
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "hello-env0-${random_string.random.result}"
+  bucket        = "hello-env0-${random_string.random.result}"
   force_destroy = true
+
+  website {
+    index_document = "index.html"
+    error_document = "index.html"
+  }
+
+  versioning {
+    enabled    = true
+    mfa_delete = false
+  }
+
+  tags = {
+    my-tag = "tag"
+  }
 }
 
 resource "aws_s3_bucket_website_configuration" "website_config" {
