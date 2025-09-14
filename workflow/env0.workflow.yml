@@ -6,7 +6,7 @@ environments:
   second:
     workspace: 'second'
     name: second
-    templateName: 'null'
+    templateName: 'error-template'
     needs:
       - first
   third:
