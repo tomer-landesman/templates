@@ -2,7 +2,7 @@ environments:
   first:
     workspace: 'first'
     name: first
-    templateName: 'error-template'
+    templateName: 'null'
   second:
     workspace: 'second'
     name: second
