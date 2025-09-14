@@ -1,0 +1,254 @@
+environments:
+  # DNS Infrastructure
+  workload-zone:
+    name: 'DNS Zone'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+
+  workload-zone-delegation:
+    name: 'DNS Zone Delegation'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    needs:
+      - workload-zone
+
+  workload-zone-association:
+    name: 'DNS Zone Association'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    needs:
+      - workload-vpc
+
+  # Network Infrastructure
+  workload-vpc:
+    name: 'VPC'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+
+  workload-tgw-attachment:
+    name: 'Transit Gateway Attachment'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    needs:
+      - workload-vpc
+
+  workload-vpc-routes:
+    name: 'VPC Routes'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    needs:
+      - workload-tgw-attachment
+
+  workload-tgw-peering-shared-us-static-route-accepter:
+    name: 'TGW Peering US Static Route Accepter'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    needs:
+      - workload-tgw-attachment
+
+  workload-tgw-rt-association:
+    name: 'Transit Gateway Route Table Association'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    needs:
+      - workload-tgw-attachment
+
+  # Kubernetes Infrastructure
+  workload-kubernetes-cluster:
+    name: 'Kubernetes Cluster'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+    needs:
+      - workload-vpc
+
+  workload-kubernetes-env0:
+    name: 'Kubernetes env0 Integration'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    needs:
+      - workload-kubernetes-cluster
+      - workload-zone
+      - workload-acm
+      - workload-acm-us-east-1
+      - workload-global-accelerator
+
+  # Load Balancer Infrastructure
+  workload-global-accelerator:
+    name: 'Global Accelerator'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+
+  workload-global-accelerator-endpoint-group:
+    name: 'Global Accelerator Endpoint Group'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    needs:
+      - workload-global-accelerator
+      - workload-alb-public
+
+  # DNS Records
+  workload-public-global-dns-records:
+    name: 'Public Global DNS Records'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+
+  workload-public-global-cdn-dns-records:
+    name: 'Public Global CDN DNS Records'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+
+  workload-public-prod-dns-records:
+    name: 'Public Prod DNS Records'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+
+  workload-public-prod-cdn-dns-records:
+    name: 'Public Prod CDN DNS Records'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+
+  workload-public-wizard-dns-records:
+    name: 'Public Wizard DNS Records'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+
+  workload-private-dns-records:
+    name: 'Private DNS Records'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+    needs:
+      - workload-alb-private
+
+  # Security Infrastructure
+  workload-acm:
+    name: 'ACM Certificate'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+
+  workload-acm-us-east-1:
+    name: 'ACM Certificate US East 1'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+
+  # Application Load Balancers
+  workload-alb-public:
+    name: 'Public Application Load Balancer'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+    needs:
+      - workload-acm
+      - workload-zone
+
+  workload-alb-private:
+    name: 'Private Application Load Balancer'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+    needs:
+      - workload-acm
+      - workload-zone
+
+  # Kubernetes Add-ons
+  workload-kubernetes-addons:
+    name: 'Kubernetes Add-ons'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+    needs:
+      - workload-kubernetes-cluster
+      - workload-alb-public
+      - workload-alb-private
+
+  workload-kubernetes-rbac:
+    name: 'Kubernetes RBAC'
+    vcs:
+      type: 'terraform'
+      repository: 'https://github.com/env0/templates'
+      path: 'misc/null-resource'
+      terraformVersion: '1.5.0'
+    requiresApproval: false
+    needs:
+      - workload-kubernetes-cluster
+
+settings:
+  environmentRemovalStrategy: destroy
