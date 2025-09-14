@@ -2,11 +2,11 @@ environments:
   first:
     workspace: 'first'
     name: first
-    templateName: 'null'
+    templateName: 'error-template'
   second:
     workspace: 'second'
     name: second
-    templateName: 'error-template'
+    templateName: 'null'
     needs:
       - first
   third:
