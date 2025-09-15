@@ -1,24 +1,20 @@
 environments:
   first:
-    workspace: 'first'
     name: first
-    templateName: 'null'
+    templateName: "null"
   second:
-    workspace: 'second'
     name: second
-    templateName: 'null'
+    templateName: "null"
     needs:
       - first
   third:
-    workspace: 'third'
     name: third
-    templateName: 'null'
+    templateName: "null"
     needs:
       - first
-  forth: 
-    workspace: 'forth'
+  forth:
     name: forth
-    templateName: 'null'
+    templateName: "null"
     needs:
       - second
       - third
