@@ -4,5 +4,5 @@ output "instance_ip_addr" {
   sensitive = true
 }
 
-resource "null_resource" null {
+resource "null_resource" "null_2" {
 }
