@@ -5,5 +5,5 @@ output "instance_ip_addr" {
 }
 
 resource "null_resource" "null_2" {
-    count = 3
+    count = 4
 }
